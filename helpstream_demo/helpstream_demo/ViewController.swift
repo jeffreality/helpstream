@@ -21,13 +21,13 @@ class ViewController: UIViewController {
     // This is an example of launching HelpStream via the user shaking the device
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            helpStream.launch()
+            helpStream.launch(from: self)
         }
     }
 
     // This is an example of launching HelpStream from a button
     @IBAction func helpButtonTapped(_ sender: UIButton) {
-        helpStream.launch()
+        helpStream.launch(from: self)
     }
 }
 

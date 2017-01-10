@@ -1,5 +1,5 @@
 //
-//  HelpStreamViewController.swift
+//  HelpStreamTabBarController.swift
 //  HelpStream
 //
 //  Created by Jeffrey Berthiaume on 1/3/17.
@@ -8,8 +8,6 @@
 
 import Foundation
 
-class HelpStreamViewController: UIViewController {
+class HelpStreamTabBarController: UITabBarController {
     
 }
-
-extension HelpStreamViewController: Storyboardable { }

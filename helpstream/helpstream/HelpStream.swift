@@ -10,14 +10,17 @@ import Foundation
 
 // init with enum for color, fonts, etc.
 
-public class HelpStream {
+public class HelpStream: NSObject {
     
     public static let sharedInstance = HelpStream()
     
-    public init() {
+    public override init() {
     }
     
-    public func launch() {
-        print("Yeah, it works")
+    public func launch(from viewController: UIViewController) {
+        let bundle = Bundle(for: HelpStream.self)
+        let storyboard = UIStoryboard(name: "HelpStream", bundle: bundle)
+        let controller = storyboard.instantiateViewController(withIdentifier: "HelpStreamTabBarController")
+        viewController.present(controller, animated: true, completion: nil)
     }
 }

@@ -374,6 +374,7 @@
 				002CA9001E1C525E004969CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
