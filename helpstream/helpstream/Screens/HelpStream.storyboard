@@ -111,12 +111,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="38w-yp-fa6">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="38w-yp-fa6">
                                 <rect key="frame" x="8" y="116" width="359" height="494"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FAQCategoryCell" textLabel="6Yt-4f-8xX" style="IBUITableViewCellStyleDefault" id="FEM-ij-YjM">
-                                        <rect key="frame" x="0.0" y="28" width="359" height="44"/>
+                                        <rect key="frame" x="0.0" y="1" width="359" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FEM-ij-YjM" id="ON2-9I-yco">
                                             <rect key="frame" x="0.0" y="0.0" width="326" height="43"/>
@@ -158,13 +158,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Help" id="vc1-DG-ruA">
-                        <barButtonItem key="leftBarButtonItem" image="backbutton" id="9nT-2j-IPQ"/>
+                        <barButtonItem key="leftBarButtonItem" image="backbutton" id="9nT-2j-IPQ">
+                            <connections>
+                                <action selector="goBack:" destination="FYw-XU-2vW" id="oST-WX-qth"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="closebutton" id="XKl-v2-IDp">
                             <connections>
                                 <action selector="closePanel:" destination="FYw-XU-2vW" id="aju-IF-oHc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="backButton" destination="9nT-2j-IPQ" id="dgu-qI-biy"/>
+                        <outlet property="tableView" destination="38w-yp-fa6" id="zBx-MY-Cf2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iy6-5g-QHV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

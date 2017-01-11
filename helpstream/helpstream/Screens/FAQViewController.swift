@@ -13,16 +13,49 @@ class FAQViewController: UIViewController {
     var currentData: [FAQCategory] = []
     var faqIndex: [Int] = []
     
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var tableView: UITableView!
+    
     @IBAction func closePanel(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
+    @IBAction func goBack(_ sender: Any) {
+        // delete the last item from faqIndex
+        // navigate through faqData
+        // reset the backButton
+        // reload the tableView
+        
+        faqIndex.removeLast()
+        currentData = faqData
+        var currentItem: FAQCategory? = nil
+        for i in 0..<faqIndex.count {
+            let idx = faqIndex[i]
+            currentItem = currentData[idx]
+            currentData = (currentItem?.subCategories!)!
+        }
+        if (currentItem != nil)  {
+            self.navigationItem.title = currentItem?.title
+        } else {
+            self.navigationItem.title = "Help"
+        }
+        setBackButton(isEnabled: (faqIndex.count > 0))
+        tableView.reloadData()
+    }
+    
+    func setBackButton(isEnabled: Bool) {
+        backButton.isEnabled = isEnabled
+        backButton.tintColor = isEnabled ? self.navigationItem.titleView?.tintColor : UIColor.clear
+    }
+    
     override func viewDidLoad() {
-        self.title = "Help"
+        self.navigationItem.title = "Help"
         
         loadData()
         
         currentData = faqData
+        
+        setBackButton(isEnabled: false)
     }
     
     // FAQCategoryCell
@@ -52,7 +85,8 @@ extension FAQViewController: UITableViewDelegate {
             print (details)
         } else if let subCategories = currentItem.subCategories {
             faqIndex.append(indexPath.row)
-            self.title = currentItem.title
+            setBackButton(isEnabled: true)
+            self.navigationItem.title = currentItem.title
             currentData = subCategories
             tableView.reloadData()
         }
