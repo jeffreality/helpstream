@@ -18,7 +18,7 @@ class ContactViewController: UIViewController {
     
     var messagePlaceholder: UILabel = UILabel()
     
-    @IBAction func closeButton() {
+    @IBAction func closeButton(_ sender: Any) {
         self.dismiss(animated: true)
     }
     

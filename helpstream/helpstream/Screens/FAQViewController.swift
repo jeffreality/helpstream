@@ -13,14 +13,12 @@ class FAQViewController: UIViewController {
     var currentData: [FAQCategory] = []
     var faqIndex: [Int] = []
     
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    
     @IBAction func closePanel(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
     override func viewDidLoad() {
-        navigationBar.topItem?.title = "Help"
+        self.title = "Help"
         
         loadData()
         
@@ -54,7 +52,7 @@ extension FAQViewController: UITableViewDelegate {
             print (details)
         } else if let subCategories = currentItem.subCategories {
             faqIndex.append(indexPath.row)
-            navigationBar.topItem?.title = currentItem.title
+            self.title = currentItem.title
             currentData = subCategories
             tableView.reloadData()
         }
