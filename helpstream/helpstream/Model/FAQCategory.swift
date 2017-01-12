@@ -10,6 +10,6 @@ import Foundation
 
 struct FAQCategory {
     var title: String
-    var details: String?
+    var answer: String?
     var subCategories: [FAQCategory]?
 }

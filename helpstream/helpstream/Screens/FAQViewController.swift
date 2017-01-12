@@ -38,6 +38,19 @@ class FAQViewController: UIViewController {
             return
         }
         
+        // if we're in search mode, go back to the first screen
+        if shouldShowSearchResults {
+            shouldShowSearchResults = false
+            setBackButton(isEnabled: false)
+            self.navigationItem.title = "Help"
+            searchBar.text = ""
+            searchBar.resignFirstResponder()
+            currentData = faqData
+            tableView.reloadData()
+            
+            return
+        }
+        
         // delete the last item from faqIndex
         // navigate through faqData
         // reset the backButton
@@ -83,12 +96,12 @@ class FAQViewController: UIViewController {
     
     func loadData() {
         // add items to data
-        let faq1 = FAQCategory(title: "1", details: "This is a test page", subCategories: nil)
+        let faq1 = FAQCategory(title: "1", answer: "This is a test page", subCategories: nil)
         
-        let faq2a = FAQCategory(title: "2a", details: "This is the second level", subCategories: nil)
-        let faq2b = FAQCategory(title: "2b", details: "This is also the second level", subCategories: nil)
+        let faq2a = FAQCategory(title: "2a", answer: "This is the second level", subCategories: nil)
+        let faq2b = FAQCategory(title: "2b", answer: "This is also the second level", subCategories: nil)
         
-        let faq2 = FAQCategory(title: "2", details: nil, subCategories: [faq2a, faq2b])
+        let faq2 = FAQCategory(title: "2", answer: nil, subCategories: [faq2a, faq2b])
         
         faqData = [faq1, faq2]
         
@@ -100,7 +113,7 @@ class FAQViewController: UIViewController {
         var arr: [FAQCategory] = []
         for i in 0..<categories.count {
             let item = categories[i]
-            if (item.details != nil) {
+            if (item.answer != nil) {
                 arr.append(item)
             } else if let subCategories = item.subCategories {
                 arr = arr + flattenSearchData(categories: subCategories)
@@ -114,12 +127,9 @@ extension FAQViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         shouldShowSearchResults = true
-        tableView.reloadData()
-    }
-    
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        shouldShowSearchResults = false
+        self.navigationItem.title = "Search Help..."
+        searchResultData = []
+        setBackButton(isEnabled: true)
         tableView.reloadData()
     }
     
@@ -135,17 +145,19 @@ extension FAQViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let searchString = searchBar.text
         
-        searchResultData = flatSearchData.filter({ (item) -> Bool in
-            let str: NSString = item.title.appending(" ".appending(item.details!)) as NSString
-            return (str.range(of: searchString!, options: .caseInsensitive).location != NSNotFound)
-        })
-        
-        if searchResultData.count == 0 {
-            shouldShowSearchResults = false
-        } else {
+        if (searchString?.characters.count)! > 2 {
+            searchResultData = flatSearchData.filter({ (item) -> Bool in
+                let str: NSString = item.title.appending(" ".appending(item.answer!)) as NSString
+                return (str.range(of: searchString!, options: .caseInsensitive).location != NSNotFound)
+            })
+            
             shouldShowSearchResults = true
+            
+            if searchResultData.count == 0 {
+                searchResultData = []
+            }
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
     
 }
@@ -155,10 +167,16 @@ extension FAQViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // if currentRow has string, pull up webview
         // else go to next level and refresh table
-        let currentItem = currentData[indexPath.row]
-        if let details = currentItem.details {
+        var currentItem: FAQCategory
+        if shouldShowSearchResults {
+            searchBar.resignFirstResponder()
+            currentItem = searchResultData[indexPath.row]
+        } else {
+            currentItem = currentData[indexPath.row]
+        }
+        if let answer = currentItem.answer {
             setBackButton(isEnabled: true)
-            webView.loadHTMLString(details, baseURL: nil)
+            webView.loadHTMLString(answer, baseURL: nil)
             webView.isHidden = false
             previousPageTitle = self.navigationItem.title!
             self.navigationItem.title = currentItem.title
