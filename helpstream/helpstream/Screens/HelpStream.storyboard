@@ -138,12 +138,15 @@
                                     <outlet property="delegate" destination="FYw-XU-2vW" id="fOq-hM-qbN"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="BSw-Qh-eHf">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="search here..." translatesAutoresizingMaskIntoConstraints="NO" id="BSw-Qh-eHf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="WAL-Fe-NRR"/>
                                 </constraints>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="FYw-XU-2vW" id="06l-DK-pYj"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -171,6 +174,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backButton" destination="9nT-2j-IPQ" id="dgu-qI-biy"/>
+                        <outlet property="searchBar" destination="BSw-Qh-eHf" id="fO3-aY-A8s"/>
                         <outlet property="tableView" destination="38w-yp-fa6" id="zBx-MY-Cf2"/>
                     </connections>
                 </viewController>
