@@ -12,6 +12,8 @@ class FAQViewController: UIViewController {
     var faqData: [FAQCategory] = []
     var currentData: [FAQCategory] = []
     var faqIndex: [Int] = []
+    var previousPageTitle: String = "Help"
+    var webView: UIWebView = UIWebView()
     
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -21,6 +23,14 @@ class FAQViewController: UIViewController {
     }
     
     @IBAction func goBack(_ sender: Any) {
+        
+        // if the webview is displayed, just hide it
+        guard webView.isHidden == true else {
+            webView.isHidden = true
+            self.navigationItem.title = previousPageTitle
+            return
+        }
+        
         // delete the last item from faqIndex
         // navigate through faqData
         // reset the backButton
@@ -41,6 +51,7 @@ class FAQViewController: UIViewController {
         }
         setBackButton(isEnabled: (faqIndex.count > 0))
         tableView.reloadData()
+        
     }
     
     func setBackButton(isEnabled: Bool) {
@@ -51,6 +62,10 @@ class FAQViewController: UIViewController {
     override func viewDidLoad() {
         self.navigationItem.title = "Help"
         
+        self.view.addSubview(webView)
+        webView.frame = tableView.frame
+        webView.isHidden = true
+        
         loadData()
         
         currentData = faqData
@@ -58,7 +73,6 @@ class FAQViewController: UIViewController {
         setBackButton(isEnabled: false)
     }
     
-    // FAQCategoryCell
     func loadData() {
         // add items to data
         let faq1 = FAQCategory(title: "1", details: "This is a test page", subCategories: nil)
@@ -81,8 +95,11 @@ extension FAQViewController: UITableViewDelegate {
         // else go to next level and refresh table
         let currentItem = currentData[indexPath.row]
         if let details = currentItem.details {
-            // display webview
-            print (details)
+            setBackButton(isEnabled: true)
+            webView.loadHTMLString(details, baseURL: nil)
+            webView.isHidden = false
+            previousPageTitle = self.navigationItem.title!
+            self.navigationItem.title = currentItem.title
         } else if let subCategories = currentItem.subCategories {
             faqIndex.append(indexPath.row)
             setBackButton(isEnabled: true)
