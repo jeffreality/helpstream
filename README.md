@@ -11,7 +11,7 @@ This is a framework that can be dropped into any iOS application, in order to ad
 * FAQ list
   * List of Categories or Questions
   * Tapping each will display a WebView of html content (image links can be hosted on your own server and referenced within the text)
- * Chat Stream
+* Chat Stream
    * Like HipChat or Slack, users can view the public chatting about your app
    * Anonymous users can join the conversation (or add an avatar and name to deanonymize themselves)
    * Messages can be personally muted (which will also flag themselves on the server)
