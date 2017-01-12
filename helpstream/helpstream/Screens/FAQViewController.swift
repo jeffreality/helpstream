@@ -175,6 +175,7 @@ extension FAQViewController: UITableViewDelegate {
             currentItem = currentData[indexPath.row]
         }
         if let answer = currentItem.answer {
+            tableView.deselectRow(at: indexPath, animated: true)
             setBackButton(isEnabled: true)
             webView.loadHTMLString(answer, baseURL: nil)
             webView.isHidden = false
