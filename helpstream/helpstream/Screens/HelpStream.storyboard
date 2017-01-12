@@ -13,7 +13,7 @@
         <!--Chat Stream-->
         <scene sceneID="GRn-8S-Kc7">
             <objects>
-                <viewController storyboardIdentifier="StreamViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cBY-4u-cjf" customClass="StreamViewController" customModule="HelpStream" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StreamViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cBY-4u-cjf" customClass="StreamViewController" customModule="HelpStream" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mbE-cX-o6n"/>
                         <viewControllerLayoutGuide type="bottom" id="bOA-Ma-Q1l"/>
@@ -102,7 +102,7 @@
         <!--Help-->
         <scene sceneID="utZ-Qc-180">
             <objects>
-                <viewController storyboardIdentifier="FAQViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FYw-XU-2vW" customClass="FAQViewController" customModule="HelpStream" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FAQViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FYw-XU-2vW" customClass="FAQViewController" customModule="HelpStream" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="x7s-b5-4nC"/>
                         <viewControllerLayoutGuide type="bottom" id="ZOa-29-rgA"/>
