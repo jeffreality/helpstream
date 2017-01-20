@@ -1,28 +1,21 @@
-<?
+{<?
   require_once("db_config.php");
-  
-  $dateCreated = date ("Y-m-d H:i:s");
-  $strIPCreated = $_SERVER[REMOTE_ADDR];
+  include_once("common.php");
 
-  function cleanString ($strInput) {
-    $strInput = trim(strip_tags ($strInput));
-    return (mysqli_real_escape_string ($strInput));
-  }
-
-  $_POST[a] = cleanString ($_POST[a]);
-  $_POST[b] = cleanString ($_POST[b]);
-  $_POST[c] = cleanString ($_POST[c]);
-  $_POST[d] = cleanString ($_POST[d]);
-  $_POST[e] = cleanString ($_POST[e]);
-  $_POST[f] = cleanString ($_POST[f]);
-  $_POST[g] = cleanString ($_POST[g]);
-  $_POST[h] = cleanString ($_POST[h]);
+  $_REQUEST[a] = cleanString ($_REQUEST[a]);
+  $_REQUEST[b] = cleanString ($_REQUEST[b]);
+  $_REQUEST[c] = cleanString ($_REQUEST[c]);
+  $_REQUEST[d] = cleanString ($_REQUEST[d]);
+  $_REQUEST[e] = cleanString ($_REQUEST[e]);
+  $_REQUEST[f] = cleanString ($_REQUEST[f]);
+  $_REQUEST[g] = cleanString ($_REQUEST[g]);
+  $_REQUEST[h] = cleanString ($_REQUEST[h]);
 
   // check to see if UUID is in database
   // if not, add it
 
   $qry = mysqli_query ($mysqli, "SELECT intDeviceID, intTotalUpdates
-    FROM tblDevices WHERE strDeviceUniqueIdentifier = '$_POST[f]'");
+    FROM tblDevices WHERE strDeviceUniqueIdentifier = '$_REQUEST[f]'");
 
   if ($qry != "" && mysqli_num_rows ($qry) > 0) {
     $arr = mysqli_fetch_array ($qry);
@@ -30,13 +23,13 @@
     $intDeviceID = $arr[intDeviceID];
     $qry2 = mysqli_query ($mysqli, "UPDATE tblDevices
       SET
-        strDeviceName = '$_POST[a]',
-        strDeviceModel = '$_POST[b]',
-        strDeviceLocalizedModel = '$_POST[c]',
-        strDeviceSystemName = '$_POST[d]',
-        strDeviceSystemVersion = '$_POST[e]',
-        strDeviceLocale = '$_POST[g]',
-        strDeviceLanguage = '$_POST[h]',
+        strDeviceName = '$_REQUEST[a]',
+        strDeviceModel = '$_REQUEST[b]',
+        strDeviceLocalizedModel = '$_REQUEST[c]',
+        strDeviceSystemName = '$_REQUEST[d]',
+        strDeviceSystemVersion = '$_REQUEST[e]',
+        strDeviceLocale = '$_REQUEST[g]',
+        strDeviceLanguage = '$_REQUEST[h]',
         dateUpdated = '$dateCreated',
         strIPUpdated = '$strIPCreated',
         intTotalUpdates = '$intTotalUpdates'
@@ -57,20 +50,21 @@
       strIPCreated,
       intTotalUpdates
     ) VALUES (
-      '$_POST[a]',
-      '$_POST[b]',
-      '$_POST[c]',
-      '$_POST[d]',
-      '$_POST[e]',
-      '$_POST[f]',
-      '$_POST[g]',
-      '$_POST[h]',
+      '$_REQUEST[a]',
+      '$_REQUEST[b]',
+      '$_REQUEST[c]',
+      '$_REQUEST[d]',
+      '$_REQUEST[e]',
+      '$_REQUEST[f]',
+      '$_REQUEST[g]',
+      '$_REQUEST[h]',
       '$dateCreated',
       '$strIPCreated',
       '1'
     )");
+    
   }
+  
+  print (' "script_completed": true ');
 
-  echo "{ \"success\": true }";
-
-?>
+?>}
