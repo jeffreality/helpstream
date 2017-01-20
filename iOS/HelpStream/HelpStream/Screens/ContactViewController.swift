@@ -19,6 +19,8 @@ class ContactViewController: UIViewController {
     var messagePlaceholder: UILabel = UILabel()
     var messageResponse: UILabel = UILabel()
     
+    var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    
     @IBAction func closeButton(_ sender: Any) {
         self.dismiss(animated: true)
     }
@@ -28,6 +30,10 @@ class ContactViewController: UIViewController {
         message.delegate = self
         
         debugToggle.isSelected = true
+        
+        spinner.frame = message.frame
+        self.view.addSubview(spinner)
+        spinner.stopAnimating()
         
         messageResponse.frame = message.frame
         messageResponse.numberOfLines = 0
@@ -76,6 +82,16 @@ class ContactViewController: UIViewController {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: test)
     }
+    
+    func sendMessage() {
+        let hsapi = HelpStreamAPI()
+        hsapi.delegate = self
+        if let urlSubmitContactForm = HelpStream.sharedInstance.urlSubmitContactForm {
+            hsapi.sendContactForm(url: urlSubmitContactForm, email: emailAddress.text!, message: message.text!, debug: debugToggle.isSelected)
+        } else {
+            assert(false, "HSError: submit contact form url (urlSubmitContactForm) not configured in HelpShift")
+        }
+    }
 }
 
 extension ContactViewController: UITextFieldDelegate {
@@ -103,9 +119,7 @@ extension ContactViewController: UITextViewDelegate {
                 return false
             }
             
-            
-            // send message
-            messageResponse.text = "Thank you! Your message has been sent to the developers of this app!"
+            sendMessage()
             
             message.text = ""
             
@@ -113,7 +127,8 @@ extension ContactViewController: UITextViewDelegate {
             message.isHidden = true
             debugView.isHidden = true
             
-            messageResponse.isHidden = false
+            spinner.startAnimating()
+            
             textView.resignFirstResponder()
             return false
         } else {
@@ -121,4 +136,18 @@ extension ContactViewController: UITextViewDelegate {
         }
     }
     
+}
+
+extension ContactViewController: HelpStreamAPIDelegate {
+    func jsonResponseReceived(json: [String: Any]) {
+        // do something
+        print (json)
+        
+        DispatchQueue.main.async { [unowned self] in
+            // on successful completion
+            self.spinner.stopAnimating()
+            self.messageResponse.text = "Thank you! Your message has been sent to the developers of this app!"
+            self.messageResponse.isHidden = false
+        }
+    }
 }

@@ -56,6 +56,7 @@
 		002CA8F91E1C525E004969CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		002CA8FB1E1C525E004969CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		002CA9371E1C54FA004969CE /* HelpStream.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HelpStream.xcodeproj; path = ../HelpStream/HelpStream.xcodeproj; sourceTree = "<group>"; };
+		0037D4B01E301CFC00F04F23 /* helpstream_demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = helpstream_demo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +91,7 @@
 		002CA8EE1E1C525E004969CE /* helpstream_demo */ = {
 			isa = PBXGroup;
 			children = (
+				0037D4B01E301CFC00F04F23 /* helpstream_demo.entitlements */,
 				002CA8EF1E1C525E004969CE /* AppDelegate.swift */,
 				002CA8F11E1C525E004969CE /* ViewController.swift */,
 				002CA8F31E1C525E004969CE /* Main.storyboard */,
@@ -144,6 +146,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = T4VXPLC8GZ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -332,6 +339,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = helpstream_demo/helpstream_demo.entitlements;
 				DEVELOPMENT_TEAM = T4VXPLC8GZ;
 				INFOPLIST_FILE = helpstream_demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -346,6 +354,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = helpstream_demo/helpstream_demo.entitlements;
 				DEVELOPMENT_TEAM = T4VXPLC8GZ;
 				INFOPLIST_FILE = helpstream_demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

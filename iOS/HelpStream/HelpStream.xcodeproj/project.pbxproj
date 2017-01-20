@@ -15,6 +15,7 @@
 		002CA9441E1C5B44004969CE /* HelpStreamTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002CA9431E1C5B44004969CE /* HelpStreamTabController.swift */; };
 		002CA9461E1C5D48004969CE /* HelpStream.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 002CA9451E1C5D48004969CE /* HelpStream.storyboard */; };
 		005218961E21CF8800D3AA62 /* HelpStream.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 005218951E21CF8800D3AA62 /* HelpStream.xcassets */; };
+		0090CDAB1E2A018100AEDBB6 /* HelpStreamAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090CDAA1E2A018100AEDBB6 /* HelpStreamAPI.swift */; };
 		00C2EAB31E247D5800D18990 /* HSContactTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2EAB21E247D5800D18990 /* HSContactTextField.swift */; };
 		00C2EAB51E24908A00D18990 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2EAB41E24908A00D18990 /* UIColorExtensions.swift */; };
 		00C2EAB81E25DFF900D18990 /* FAQCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2EAB71E25DFF900D18990 /* FAQCategory.swift */; };
@@ -31,6 +32,7 @@
 		002CA9431E1C5B44004969CE /* HelpStreamTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpStreamTabController.swift; path = Screens/HelpStreamTabController.swift; sourceTree = "<group>"; };
 		002CA9451E1C5D48004969CE /* HelpStream.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HelpStream.storyboard; path = Screens/HelpStream.storyboard; sourceTree = "<group>"; };
 		005218951E21CF8800D3AA62 /* HelpStream.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HelpStream.xcassets; sourceTree = "<group>"; };
+		0090CDAA1E2A018100AEDBB6 /* HelpStreamAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpStreamAPI.swift; path = API/HelpStreamAPI.swift; sourceTree = "<group>"; };
 		00C2EAB21E247D5800D18990 /* HSContactTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HSContactTextField.swift; path = Views/HSContactTextField.swift; sourceTree = "<group>"; };
 		00C2EAB41E24908A00D18990 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = Utilities/UIColorExtensions.swift; sourceTree = "<group>"; };
 		00C2EAB71E25DFF900D18990 /* FAQCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FAQCategory.swift; path = Model/FAQCategory.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				00C2EAB61E24909800D18990 /* Views */,
 				00C2EAB91E25E00800D18990 /* Model */,
 				002CA9581E1C5F45004969CE /* Utilities */,
+				0090CDAC1E2A018F00AEDBB6 /* API */,
 				002CA92E1E1C5455004969CE /* Info.plist */,
 			);
 			path = HelpStream;
@@ -96,6 +99,14 @@
 				00C2EAB41E24908A00D18990 /* UIColorExtensions.swift */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		0090CDAC1E2A018F00AEDBB6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0090CDAA1E2A018100AEDBB6 /* HelpStreamAPI.swift */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 		00C2EAB61E24909800D18990 /* Views */ = {
@@ -198,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				000757991E209F97002E8082 /* StreamViewController.swift in Sources */,
+				0090CDAB1E2A018100AEDBB6 /* HelpStreamAPI.swift in Sources */,
 				00C2EAB51E24908A00D18990 /* UIColorExtensions.swift in Sources */,
 				00C2EAB81E25DFF900D18990 /* FAQCategory.swift in Sources */,
 				002CA9361E1C5460004969CE /* HelpStream.swift in Sources */,
