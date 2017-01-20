@@ -24,17 +24,7 @@ public class HelpStream: NSObject {
     
     // URLs to webserver
     
-    public var urlSendStats: URL?
-    
-    public var urlGetStream: URL?
-    public var urlSetStream: URL?
-    public var urlSetStreamProfile: URL?
-    public var urlUploadStreamAvatar: URL?
-    
-    public var urlCheckFAQVersion: URL?
-    public var urlGetFAQ: URL?
-    
-    public var urlSubmitContactForm: URL?
+    public var apiURL: URL?
     
     // things to initialize:
     // - colors, fonts of interface

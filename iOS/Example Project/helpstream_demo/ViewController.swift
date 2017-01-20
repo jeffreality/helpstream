@@ -23,18 +23,8 @@ class ViewController: UIViewController {
         // If you have your own local uuid for your app, you can set it above (or uncomment the line above to test).
         // This is optional and you do not need to set it.
         
-        // You MUST set all of the following urls for this to work:
-        helpStream.urlSendStats = URL(string: "http://b635.com/helpstream/stats.php")
-        
-        helpStream.urlGetStream = URL(string: "http://b635.com/helpstream/get-stream.php")
-        helpStream.urlSetStream = URL(string: "http://b635.com/helpstream/set-stream.php")
-        helpStream.urlSetStreamProfile = URL(string: "http://b635.com/helpstream/set-stream-profile.php")
-        helpStream.urlUploadStreamAvatar = URL(string: "http://b635.com/helpstream/upload-stream-avatar.php")
-        
-        helpStream.urlCheckFAQVersion = URL(string: "http://b635.com/helpstream/check-faq-version.php")
-        helpStream.urlGetFAQ = URL(string: "http://b635.com/helpstream/get-faq.php")
-        
-        helpStream.urlSubmitContactForm = URL(string: "http://b635.com/helpstream/submit-contact-form.php")
+        // You MUST set this urls for information to be stored on/loaded from your webserver:
+        helpStream.apiURL = URL(string: "http://b635.com/helpstream")
     
     }
     

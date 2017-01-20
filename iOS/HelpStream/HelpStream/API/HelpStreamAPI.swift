@@ -17,6 +17,18 @@ class HelpStreamAPI {
     var isNetworkAvailable: Bool = false
     var checkingNetwork: Bool = false
     
+    /*
+    
+    helpStream.urlGetStream = URL(string: "http://b635.com/helpstream/get-stream.php")
+    helpStream.urlSetStream = URL(string: "http://b635.com/helpstream/set-stream.php")
+    helpStream.urlSetStreamProfile = URL(string: "http://b635.com/helpstream/set-stream-profile.php")
+    helpStream.urlUploadStreamAvatar = URL(string: "http://b635.com/helpstream/upload-stream-avatar.php")
+    
+    helpStream.urlCheckFAQVersion = URL(string: "http://b635.com/helpstream/check-faq-version.php")
+    helpStream.urlGetFAQ = URL(string: "http://b635.com/helpstream/get-faq.php")
+    
+    */
+    
     weak var delegate: HelpStreamAPIDelegate?
     
     func checkNetworkAvailability(url: URL) -> Bool {
@@ -46,7 +58,7 @@ class HelpStreamAPI {
     }
     
     func sendStats() {
-        guard let url = HelpStream.sharedInstance.urlSendStats else {
+        guard let url = getApiUrl(path: "/stats.php") else {
             assert (false, "HSError: send stats url (urlSendStats) not configured in HelpShift")
             return
         }
@@ -74,10 +86,10 @@ class HelpStreamAPI {
         requestJson(url: url, method: "POST", body: requestString)
     }
     
-    func sendContactForm(url: URL, email: String, message: String, debug: Bool) {
+    func sendContactForm(email: String, message: String, debug: Bool) {
         let hs = HelpStream.sharedInstance
         
-        guard let url = HelpStream.sharedInstance.urlSubmitContactForm else {
+        guard let url = getApiUrl(path: "/submit-contact-form.php") else {
             assert (false, "HSError: submit contact url (urlSubmitContactForm ) not configured in HelpShift")
             return
         }
@@ -87,7 +99,7 @@ class HelpStreamAPI {
             return
         }
         
-        let uuid = HelpStream.sharedInstance.getUUID()
+        let uuid = hs.getUUID()
         
         var debugDetails = ""
         if debug,
@@ -105,6 +117,15 @@ class HelpStreamAPI {
     }
     
     // =========================
+    
+    func getApiUrl(path: String) -> URL? {
+        guard let apiURL = HelpStream.sharedInstance.apiURL else {
+            assert (false, "HSError: API url not configured properly in HelpShift")
+            return nil
+        }
+        
+        return (URL(string: apiURL.absoluteString + path))
+    }
     
     func requestJson(url: URL, method: String, body: String) {
         

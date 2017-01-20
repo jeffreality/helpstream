@@ -86,11 +86,7 @@ class ContactViewController: UIViewController {
     func sendMessage() {
         let hsapi = HelpStreamAPI()
         hsapi.delegate = self
-        if let urlSubmitContactForm = HelpStream.sharedInstance.urlSubmitContactForm {
-            hsapi.sendContactForm(url: urlSubmitContactForm, email: emailAddress.text!, message: message.text!, debug: debugToggle.isSelected)
-        } else {
-            assert(false, "HSError: submit contact form url (urlSubmitContactForm) not configured in HelpShift")
-        }
+        hsapi.sendContactForm(email: emailAddress.text!, message: message.text!, debug: debugToggle.isSelected)
     }
 }
 
