@@ -61,6 +61,8 @@ class ContactViewController: UIViewController {
         // border formatting for debugView
         debugView.layer.borderWidth = 1
         debugView.layer.borderColor = UIColor(hex: 0xe2e2e2).cgColor
+        
+        loadCachedEmailAddress()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,6 +89,22 @@ class ContactViewController: UIViewController {
         let hsapi = HelpStreamAPI()
         hsapi.delegate = self
         hsapi.sendContactForm(email: emailAddress.text!, message: message.text!, debug: debugToggle.isSelected)
+    }
+    
+    func loadCachedEmailAddress() {
+        let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+        let emailKey = appName + ".user_email"
+        
+        if let email = UserDefaults.standard.string(forKey: emailKey) {
+            emailAddress.text = email
+        }
+    }
+    
+    func cacheEmailAddress() {
+        let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+        let emailKey = appName + ".user_email"
+        
+        UserDefaults.standard.setValue(emailAddress.text, forKey: emailKey)
     }
 }
 
@@ -116,6 +134,7 @@ extension ContactViewController: UITextViewDelegate {
             }
             
             sendMessage()
+            cacheEmailAddress()
             
             message.text = ""
             
