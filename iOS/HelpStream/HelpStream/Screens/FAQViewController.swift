@@ -83,7 +83,6 @@ class FAQViewController: UIViewController {
         self.navigationItem.title = "Help"
         
         self.view.addSubview(webView)
-        webView.frame = tableView.frame
         webView.isHidden = true
         
         loadData()
@@ -178,6 +177,7 @@ extension FAQViewController: UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             setBackButton(isEnabled: true)
             webView.loadHTMLString(answer, baseURL: nil)
+            webView.frame = tableView.frame
             webView.isHidden = false
             previousPageTitle = self.navigationItem.title!
             self.navigationItem.title = currentItem.title
