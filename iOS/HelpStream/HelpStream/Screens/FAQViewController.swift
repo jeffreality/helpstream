@@ -33,6 +33,7 @@ class FAQViewController: UIViewController {
         
         // if the webview is displayed, just hide it
         guard webView.isHidden == true else {
+            webView.loadHTMLString("", baseURL: nil)
             webView.isHidden = true
             self.navigationItem.title = previousPageTitle
             return
@@ -82,29 +83,15 @@ class FAQViewController: UIViewController {
     override func viewDidLoad() {
         self.navigationItem.title = "Help"
         
-        self.view.addSubview(webView)
+        webView.loadHTMLString("", baseURL: nil)
         webView.isHidden = true
+        self.view.addSubview(webView)
         
-        loadData()
-        flatSearchData = flattenSearchData(categories: faqData)
-        
-        currentData = faqData
+        let hs = HelpStreamAPI.sharedInstance
+        hs.delegate = self
+        hs.getFAQ()
         
         setBackButton(isEnabled: false)
-    }
-    
-    func loadData() {
-        // add items to data
-        let faq1 = FAQCategory(title: "1", answer: "This is a test page", subCategories: nil)
-        
-        let faq2a = FAQCategory(title: "2a", answer: "This is the second level", subCategories: nil)
-        let faq2b = FAQCategory(title: "2b", answer: "This is also the second level", subCategories: nil)
-        
-        let faq2 = FAQCategory(title: "2", answer: nil, subCategories: [faq2a, faq2b])
-        
-        faqData = [faq1, faq2]
-        
-        //print (faqData)
     }
     
     func flattenSearchData(categories: [FAQCategory]) -> [FAQCategory] {
@@ -220,4 +207,57 @@ extension FAQViewController: UITableViewDataSource {
         
         return cell
     }
+}
+
+extension FAQViewController: HelpStreamAPIDelegate {
+    
+    func jsonResponseReceived(json: [String : Any]) {
+        guard let jsonNSArr = json["FAQ"] as? NSArray else {
+            return
+        }
+        
+        let jsonArr = jsonNSArr as Array
+        
+        var tempArr: [Int: [FAQCategory]] = [:]
+        
+        for item in jsonArr {
+            let intFAQID = Int(item["intFAQID"] as! String)!
+            let intParentID = Int(item["intParentID"] as! String)!
+            let strTitle = item["strTitle"] as! String
+            var strAnswer: String? = item["strAnswer"] as? String
+            var subCategories: [FAQCategory]?
+            
+            if strAnswer == "" {
+                strAnswer = nil
+                
+                subCategories = tempArr[intFAQID]
+                tempArr[intFAQID] = nil
+            }
+            
+            let FAQAnswer = FAQCategory(title: strTitle, answer: strAnswer, subCategories: subCategories)
+            
+            if let parentArr: [FAQCategory] = tempArr[intParentID] {
+                tempArr[intParentID] = parentArr + [FAQAnswer]
+            } else {
+                tempArr[intParentID] = [FAQAnswer]
+            }
+        }
+        
+        faqData = []
+        for dict in tempArr {
+            faqData += dict.value
+        }
+        
+        flatSearchData = flattenSearchData(categories: faqData)
+        
+        currentData = faqData
+        
+        
+        DispatchQueue.main.async { [unowned self] in
+            self.tableView.reloadData()
+        }
+        
+    }
+    
+    
 }

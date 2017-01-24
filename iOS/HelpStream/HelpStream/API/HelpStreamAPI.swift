@@ -24,7 +24,6 @@ class HelpStreamAPI {
     helpStream.urlSetStreamProfile = URL(string: "http://b635.com/helpstream/set-stream-profile.php")
     helpStream.urlUploadStreamAvatar = URL(string: "http://b635.com/helpstream/upload-stream-avatar.php")
     
-    helpStream.urlCheckFAQVersion = URL(string: "http://b635.com/helpstream/check-faq-version.php")
     helpStream.urlGetFAQ = URL(string: "http://b635.com/helpstream/get-faq.php")
     
     */
@@ -90,7 +89,7 @@ class HelpStreamAPI {
         let hs = HelpStream.sharedInstance
         
         guard let url = getApiUrl(path: "/submit-contact-form.php") else {
-            assert (false, "HSError: submit contact url (urlSubmitContactForm ) not configured in HelpShift")
+            assert (false, "HSError: submit contact form url not configured in HelpShift")
             return
         }
         
@@ -112,6 +111,27 @@ class HelpStreamAPI {
                                    email,
                                    message,
                                    debugDetails).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! as String
+        
+        requestJson(url: url, method: "POST", body: requestString)
+    }
+    
+    func getFAQ() {
+        let hs = HelpStream.sharedInstance
+        
+        guard let url = getApiUrl(path: "/get-faq.php") else {
+            assert (false, "HSError: get FAQ url not configured in HelpShift")
+            return
+        }
+        
+        guard checkNetworkAvailability(url: url) else {
+            assert (false, "HSError: network not reachable")
+            return
+        }
+        
+        let uuid = hs.getUUID()
+        
+        let requestString = String(format: "id=%@",
+                                   uuid).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! as String
         
         requestJson(url: url, method: "POST", body: requestString)
     }

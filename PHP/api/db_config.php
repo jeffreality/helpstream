@@ -4,7 +4,14 @@
 
   $mysqli = mysqli_connect ("localhost", "DATABASE_USER_NAME", "DATABASE_USER_PASSWORD", "DATABASE_NAME");
   
+  // default locale for FAQ (equivalent of "Base localization" in iOS)
+  $default_locale = "en_US";
   
+  
+  
+  
+  
+  //===================================
   
   /* check connection */
   if (mysqli_connect_errno()) {
