@@ -1,5 +1,5 @@
 //
-//  HSContactTextField.swift
+//  HSTextField.swift
 //  HelpStream
 //
 //  Created by Jeffrey Berthiaume on 1/9/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HSContactTextField: UITextField {
+class HSTextField: UITextField {
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: 8, dy: 4)

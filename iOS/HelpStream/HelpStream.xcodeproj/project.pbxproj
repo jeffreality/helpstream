@@ -10,13 +10,15 @@
 		000757991E209F97002E8082 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000757981E209F97002E8082 /* StreamViewController.swift */; };
 		0007579B1E209FAF002E8082 /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007579A1E209FAF002E8082 /* FAQViewController.swift */; };
 		0007579D1E209FC0002E8082 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007579C1E209FC0002E8082 /* ContactViewController.swift */; };
+		002A7CB01E396CA400F8C5C2 /* StreamMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A7CAF1E396CA400F8C5C2 /* StreamMessage.swift */; };
+		002A7CB21E3AB7A900F8C5C2 /* UITableViewEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A7CB11E3AB7A900F8C5C2 /* UITableViewEmpty.swift */; };
 		002CA92F1E1C5455004969CE /* HelpStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 002CA92D1E1C5455004969CE /* HelpStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		002CA9361E1C5460004969CE /* HelpStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002CA9351E1C5460004969CE /* HelpStream.swift */; };
 		002CA9441E1C5B44004969CE /* HelpStreamTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002CA9431E1C5B44004969CE /* HelpStreamTabController.swift */; };
 		002CA9461E1C5D48004969CE /* HelpStream.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 002CA9451E1C5D48004969CE /* HelpStream.storyboard */; };
 		005218961E21CF8800D3AA62 /* HelpStream.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 005218951E21CF8800D3AA62 /* HelpStream.xcassets */; };
 		0090CDAB1E2A018100AEDBB6 /* HelpStreamAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090CDAA1E2A018100AEDBB6 /* HelpStreamAPI.swift */; };
-		00C2EAB31E247D5800D18990 /* HSContactTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2EAB21E247D5800D18990 /* HSContactTextField.swift */; };
+		00C2EAB31E247D5800D18990 /* HSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2EAB21E247D5800D18990 /* HSTextField.swift */; };
 		00C2EAB51E24908A00D18990 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2EAB41E24908A00D18990 /* UIColorExtensions.swift */; };
 		00C2EAB81E25DFF900D18990 /* FAQCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2EAB71E25DFF900D18990 /* FAQCategory.swift */; };
 /* End PBXBuildFile section */
@@ -25,6 +27,8 @@
 		000757981E209F97002E8082 /* StreamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamViewController.swift; path = Screens/StreamViewController.swift; sourceTree = "<group>"; };
 		0007579A1E209FAF002E8082 /* FAQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FAQViewController.swift; path = Screens/FAQViewController.swift; sourceTree = "<group>"; };
 		0007579C1E209FC0002E8082 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactViewController.swift; path = Screens/ContactViewController.swift; sourceTree = "<group>"; };
+		002A7CAF1E396CA400F8C5C2 /* StreamMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamMessage.swift; path = Model/StreamMessage.swift; sourceTree = "<group>"; };
+		002A7CB11E3AB7A900F8C5C2 /* UITableViewEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewEmpty.swift; path = Utilities/UITableViewEmpty.swift; sourceTree = "<group>"; };
 		002CA92A1E1C5455004969CE /* HelpStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HelpStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		002CA92D1E1C5455004969CE /* HelpStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpStream.h; sourceTree = "<group>"; };
 		002CA92E1E1C5455004969CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,7 +37,7 @@
 		002CA9451E1C5D48004969CE /* HelpStream.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HelpStream.storyboard; path = Screens/HelpStream.storyboard; sourceTree = "<group>"; };
 		005218951E21CF8800D3AA62 /* HelpStream.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HelpStream.xcassets; sourceTree = "<group>"; };
 		0090CDAA1E2A018100AEDBB6 /* HelpStreamAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpStreamAPI.swift; path = API/HelpStreamAPI.swift; sourceTree = "<group>"; };
-		00C2EAB21E247D5800D18990 /* HSContactTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HSContactTextField.swift; path = Views/HSContactTextField.swift; sourceTree = "<group>"; };
+		00C2EAB21E247D5800D18990 /* HSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HSTextField.swift; path = Views/HSTextField.swift; sourceTree = "<group>"; };
 		00C2EAB41E24908A00D18990 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = Utilities/UIColorExtensions.swift; sourceTree = "<group>"; };
 		00C2EAB71E25DFF900D18990 /* FAQCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FAQCategory.swift; path = Model/FAQCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				00C2EAB41E24908A00D18990 /* UIColorExtensions.swift */,
+				002A7CB11E3AB7A900F8C5C2 /* UITableViewEmpty.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -112,7 +117,7 @@
 		00C2EAB61E24909800D18990 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				00C2EAB21E247D5800D18990 /* HSContactTextField.swift */,
+				00C2EAB21E247D5800D18990 /* HSTextField.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				00C2EAB71E25DFF900D18990 /* FAQCategory.swift */,
+				002A7CAF1E396CA400F8C5C2 /* StreamMessage.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -213,8 +219,10 @@
 				00C2EAB51E24908A00D18990 /* UIColorExtensions.swift in Sources */,
 				00C2EAB81E25DFF900D18990 /* FAQCategory.swift in Sources */,
 				002CA9361E1C5460004969CE /* HelpStream.swift in Sources */,
+				002A7CB01E396CA400F8C5C2 /* StreamMessage.swift in Sources */,
 				0007579B1E209FAF002E8082 /* FAQViewController.swift in Sources */,
-				00C2EAB31E247D5800D18990 /* HSContactTextField.swift in Sources */,
+				00C2EAB31E247D5800D18990 /* HSTextField.swift in Sources */,
+				002A7CB21E3AB7A900F8C5C2 /* UITableViewEmpty.swift in Sources */,
 				002CA9441E1C5B44004969CE /* HelpStreamTabController.swift in Sources */,
 				0007579D1E209FC0002E8082 /* ContactViewController.swift in Sources */,
 			);

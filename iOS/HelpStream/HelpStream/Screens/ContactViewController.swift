@@ -112,7 +112,7 @@ extension ContactViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         message.becomeFirstResponder()
-        return true
+        return false
     }
 }
 

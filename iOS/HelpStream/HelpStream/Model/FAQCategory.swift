@@ -13,3 +13,5 @@ struct FAQCategory {
     var answer: String?
     var subCategories: [FAQCategory]?
 }
+
+typealias FAQCategories = [FAQCategory]

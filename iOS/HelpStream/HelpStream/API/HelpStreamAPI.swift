@@ -19,12 +19,13 @@ class HelpStreamAPI {
     
     /*
     
-    helpStream.urlGetStream = URL(string: "http://b635.com/helpstream/get-stream.php")
     helpStream.urlSetStream = URL(string: "http://b635.com/helpstream/set-stream.php")
+     - get user
+     - if user not created, create one with number (total users * 10, if < 10000 add 10000, then pick random number -> confirm it is unique)
+     - write to tblStreams
+     
     helpStream.urlSetStreamProfile = URL(string: "http://b635.com/helpstream/set-stream-profile.php")
-    helpStream.urlUploadStreamAvatar = URL(string: "http://b635.com/helpstream/upload-stream-avatar.php")
-    
-    helpStream.urlGetFAQ = URL(string: "http://b635.com/helpstream/get-faq.php")
+     - just change name of tblUsers where intDeviceID = same
     
     */
     
@@ -58,7 +59,7 @@ class HelpStreamAPI {
     
     func sendStats() {
         guard let url = getApiUrl(path: "/stats.php") else {
-            assert (false, "HSError: send stats url (urlSendStats) not configured in HelpShift")
+            assert (false, "HSError: send stats url (urlSendStats) not configured in HelpStream")
             return
         }
         
@@ -89,7 +90,7 @@ class HelpStreamAPI {
         let hs = HelpStream.sharedInstance
         
         guard let url = getApiUrl(path: "/submit-contact-form.php") else {
-            assert (false, "HSError: submit contact form url not configured in HelpShift")
+            assert (false, "HSError: submit contact form url not configured in HelpStream")
             return
         }
         
@@ -119,7 +120,7 @@ class HelpStreamAPI {
         let hs = HelpStream.sharedInstance
         
         guard let url = getApiUrl(path: "/get-faq.php") else {
-            assert (false, "HSError: get FAQ url not configured in HelpShift")
+            assert (false, "HSError: get FAQ url not configured in HelpStream")
             return
         }
         
@@ -130,17 +131,83 @@ class HelpStreamAPI {
         
         let uuid = hs.getUUID()
         
-        let requestString = String(format: "id=%@",
-                                   uuid).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! as String
+        let requestString = String(format: "id=%@", uuid)
+        
+        requestJson(url: url, method: "POST", body: requestString)
+    }
+    
+    func getStream(page: Int) {
+        let hs = HelpStream.sharedInstance
+        
+        guard let url = getApiUrl(path: "/get-streams.php") else {
+            assert (false, "HSError: get stream url not configured in HelpStream")
+            return
+        }
+        
+        guard checkNetworkAvailability(url: url) else {
+            assert (false, "HSError: network not reachable")
+            return
+        }
+        
+        let uuid = hs.getUUID()
+        
+        let requestString = String(format: "id=%@&pg=%i", uuid, page)
+        
+        requestJson(url: url, method: "POST", body: requestString)
+    }
+    
+    func addStreamMessage(message: String) {
+        let hs = HelpStream.sharedInstance
+        
+        guard let url = getApiUrl(path: "/set-stream.php") else {
+            assert (false, "HSError: set stream message url not configured in HelpStream")
+            return
+        }
+        
+        guard checkNetworkAvailability(url: url) else {
+            assert (false, "HSError: network not reachable")
+            return
+        }
+        
+        let uuid = hs.getUUID()
+        
+        let requestString = String(format: "id=%@&msg=%@",
+                                   uuid,
+                                   message).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! as String
+        
+        requestJson(url: url, method: "POST", body: requestString)
+    }
+    
+    func setStreamProfile(username: String) {
+        let hs = HelpStream.sharedInstance
+        
+        guard let url = getApiUrl(path: "/set-stream-profile.php") else {
+            assert (false, "HSError: set stream profile url not configured in HelpStream")
+            return
+        }
+        
+        guard checkNetworkAvailability(url: url) else {
+            assert (false, "HSError: network not reachable")
+            return
+        }
+        
+        let uuid = hs.getUUID()
+        
+        let requestString = String(format: "id=%@&name=%@",
+                                   uuid,
+                                   username).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! as String
         
         requestJson(url: url, method: "POST", body: requestString)
     }
     
     // =========================
+    // =========================
+    // =========================
+    // =========================
     
     func getApiUrl(path: String) -> URL? {
         guard let apiURL = HelpStream.sharedInstance.apiURL else {
-            assert (false, "HSError: API url not configured properly in HelpShift")
+            assert (false, "HSError: API url not configured properly in HelpStream")
             return nil
         }
         

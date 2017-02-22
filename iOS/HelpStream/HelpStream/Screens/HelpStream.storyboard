@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bhj-or-L6b">
-                                <rect key="frame" x="8" y="72" width="359" height="467"/>
+                                <rect key="frame" x="8" y="72" width="359" height="449"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StreamMessageCell" id="YDa-At-w9O">
@@ -49,25 +49,37 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNU-tp-rfc">
-                                <rect key="frame" x="0.0" y="547" width="375" height="76"/>
+                                <rect key="frame" x="0.0" y="529" width="375" height="94"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HNZ-lU-yxa">
-                                        <rect key="frame" x="8" y="8" width="359" height="60"/>
+                                        <rect key="frame" x="8" y="26" width="359" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Clg-Ya-5Tc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
-                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" lookupSuggestion="YES"/>
                                     </textView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your name (optional)" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="V4k-hB-efs" customClass="HSTextField" customModule="HelpStream" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="0.0" width="359" height="22"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="7Wy-DW-qnr"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="HNZ-lU-yxa" firstAttribute="top" secondItem="DNU-tp-rfc" secondAttribute="top" constant="8" id="5LI-3D-nGK"/>
                                     <constraint firstAttribute="trailing" secondItem="HNZ-lU-yxa" secondAttribute="trailing" constant="8" id="Qi9-Ch-61s"/>
+                                    <constraint firstItem="HNZ-lU-yxa" firstAttribute="top" secondItem="V4k-hB-efs" secondAttribute="bottom" constant="4" id="bh9-1H-WiB"/>
+                                    <constraint firstItem="V4k-hB-efs" firstAttribute="top" secondItem="DNU-tp-rfc" secondAttribute="top" id="d0z-2y-j8X"/>
+                                    <constraint firstAttribute="trailing" secondItem="V4k-hB-efs" secondAttribute="trailing" constant="8" id="fjv-PP-gea"/>
                                     <constraint firstItem="HNZ-lU-yxa" firstAttribute="leading" secondItem="DNU-tp-rfc" secondAttribute="leading" constant="8" id="lxT-qI-xfw"/>
                                     <constraint firstAttribute="bottom" secondItem="HNZ-lU-yxa" secondAttribute="bottom" constant="8" id="wsQ-Ro-7ci"/>
+                                    <constraint firstItem="V4k-hB-efs" firstAttribute="leading" secondItem="DNU-tp-rfc" secondAttribute="leading" constant="8" id="zyd-KG-0P7"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -92,7 +104,10 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="bottomConstraint" destination="LeL-2p-Jxs" id="hHw-CT-5LD"/>
                         <outlet property="message" destination="HNZ-lU-yxa" id="S1F-ad-zhC"/>
+                        <outlet property="tableView" destination="Bhj-or-L6b" id="Iae-Ar-kWT"/>
+                        <outlet property="username" destination="V4k-hB-efs" id="t8O-gx-UJM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zyz-98-Ao7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -119,11 +134,11 @@
                                         <rect key="frame" x="0.0" y="1" width="359" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FEM-ij-YjM" id="ON2-9I-yco">
-                                            <rect key="frame" x="0.0" y="0.0" width="326" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="326" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Yt-4f-8xX">
-                                                    <rect key="frame" x="15" y="0.0" width="309" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="309" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -194,7 +209,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gWA-WK-cfr" customClass="HSContactTextField" customModule="HelpStream" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gWA-WK-cfr" customClass="HSTextField" customModule="HelpStream" customModuleProvider="target">
                                 <rect key="frame" x="16" y="72" width="343" height="38"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

@@ -9,17 +9,20 @@
 import Foundation
 
 class FAQViewController: UIViewController {
-    var faqData: [FAQCategory] = []
-    var currentData: [FAQCategory] = []
+    var faqData: FAQCategories = []
+    var currentData: FAQCategories = []
     
-    var flatSearchData: [FAQCategory] = []
-    var searchResultData: [FAQCategory] = []
+    var flatSearchData: FAQCategories = []
+    var searchResultData: FAQCategories = []
     
     var faqIndex: [Int] = []
     var previousPageTitle: String = "Help"
     var webView: UIWebView = UIWebView()
     
     var shouldShowSearchResults: Bool = false
+    var isLoading: Bool = false
+    
+    var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var backButton: UIBarButtonItem!
@@ -87,16 +90,21 @@ class FAQViewController: UIViewController {
         webView.isHidden = true
         self.view.addSubview(webView)
         
+        spinner.frame = webView.frame
+        self.view.addSubview(spinner)
+        spinner.startAnimating()
+        
         let hs = HelpStreamAPI.sharedInstance
         hs.delegate = self
+        isLoading = true
         hs.getFAQ()
         
         setBackButton(isEnabled: false)
     }
     
-    func flattenSearchData(categories: [FAQCategory]) -> [FAQCategory] {
+    func flattenSearchData(categories: FAQCategories) -> FAQCategories {
         // go through all levels and flatten them
-        var arr: [FAQCategory] = []
+        var arr: FAQCategories = []
         for i in 0..<categories.count {
             let item = categories[i]
             if (item.answer != nil) {
@@ -181,7 +189,15 @@ extension FAQViewController: UITableViewDelegate {
 
 extension FAQViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if faqData.count > 0 {
+            tableView.backgroundView = nil;
+            return 1
+        } else {
+            if !isLoading {
+                UITableViewEmpty.displayNoRowsMessage(viewController: self, tableView: tableView, message: "There are currently no answered questions.")
+            }
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -218,14 +234,14 @@ extension FAQViewController: HelpStreamAPIDelegate {
         
         let jsonArr = jsonNSArr as Array
         
-        var tempArr: [Int: [FAQCategory]] = [:]
+        var tempArr: [Int: FAQCategories] = [:]
         
         for item in jsonArr {
             let intFAQID = Int(item["intFAQID"] as! String)!
             let intParentID = Int(item["intParentID"] as! String)!
             let strTitle = item["strTitle"] as! String
             var strAnswer: String? = item["strAnswer"] as? String
-            var subCategories: [FAQCategory]?
+            var subCategories: FAQCategories?
             
             if strAnswer == "" {
                 strAnswer = nil
@@ -236,7 +252,7 @@ extension FAQViewController: HelpStreamAPIDelegate {
             
             let FAQAnswer = FAQCategory(title: strTitle, answer: strAnswer, subCategories: subCategories)
             
-            if let parentArr: [FAQCategory] = tempArr[intParentID] {
+            if let parentArr: FAQCategories = tempArr[intParentID] {
                 tempArr[intParentID] = parentArr + [FAQAnswer]
             } else {
                 tempArr[intParentID] = [FAQAnswer]
@@ -255,6 +271,8 @@ extension FAQViewController: HelpStreamAPIDelegate {
         
         DispatchQueue.main.async { [unowned self] in
             self.tableView.reloadData()
+            self.spinner.stopAnimating()
+            self.isLoading = false
         }
         
     }
