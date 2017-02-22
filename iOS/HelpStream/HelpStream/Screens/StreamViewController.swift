@@ -207,10 +207,10 @@ extension StreamViewController: HelpStreamAPIDelegate {
         print (jsonArr)
         
         for item in jsonArr {
-            let date = item["dateCreated"] as! String
-            let username = item["strUsername"] as! String
-            let color = item["strColor"] as! String
-            let message = item["strMessage"] as! String
+//            let date = item["dateCreated"] as! String
+//            let username = item["strUsername"] as! String
+//            let color = item["strColor"] as! String
+//            let message = item["strMessage"] as! String
             
             
         }
